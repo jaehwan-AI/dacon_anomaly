@@ -3,9 +3,10 @@ import torch.nn as nn
 
 
 class Detector(nn.Module):
-    def __init__(self):
+    def __init__(self, args):
         super(Detector, self).__init__()
-        self.model = timm.create_model('', pretrained=True,)
+        if args.model == 'resnetv2':
+            self.model = timm.create_model('resnetv2_50x3_bitm_in21k', pretrained=args.pretrained,)
 
         self.model.reset_classifier(num_classes=88)
     
